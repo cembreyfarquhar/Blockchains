@@ -1,6 +1,7 @@
 import time
 import hashlib
 import json
+from urllib.parse import urlparse
 
 class Blockchain:
     def __init__(self):
@@ -11,7 +12,6 @@ class Blockchain:
         # Genesis Block
         self.create_block("1", 100)
 
-    # @app.route("/nodes/register", methods=["POST"])
     def add_node(self, address):
         parsed_url = urlparse(address)
         self.nodes.add(parsed_url.netloc)
@@ -92,5 +92,3 @@ class Blockchain:
         # Make sure the dictionairy is ordered to keep consistent hashes
         block_string = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
-
-    
